@@ -2,7 +2,7 @@
 Một số hàm thực hiện lệnh để thao tác với ldplayer
 Thêm file ldplayer.py vào dự án của bạn và sử dụng như bên dưới :D
 
-```
+```python
 import ldplayer
 obj = LDPlayer() # tìm tới folder có đường dẫn giống như này F:\LDPlayer\LDPlayer9 và set vào envrionment variable hoặc truyền vào hàm __init__
 
