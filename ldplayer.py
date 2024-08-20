@@ -74,6 +74,33 @@ class LDPlayer:
     
 
     """
+        remove device
+        @param deviceName: device name
+        @param deviceIndex: device index
+        @return: True if success, else error
+    """
+    def remove (self, deviceName: str = '', deviceIndex: int = None) -> bool:
+        try:
+            command = []
+            command.append(self.ldconsolePath)
+            command.append('remove')
+            if deviceName != '':
+                command.append('--name')
+                command.append(deviceName)
+            
+            if deviceIndex != None:
+                command.append('--index')
+                command.append(str(deviceIndex))
+
+            stdout, stderr = self.objLDExec.execute(command)
+            if stderr != '':
+                raise handleException(stderr)
+            
+            return True
+        
+        except Exception as e:
+            raise handleException(str(e))
+    """
         Copy device 
         @param deviceName: device name
         @param fromDeviceName: from device name
@@ -93,7 +120,7 @@ class LDPlayer:
                 command.append('--from')
                 command.append(fromDeviceName)
 
-            if fromDeviceIndex != 0:
+            if fromDeviceIndex != None:
                 command.append('--from')
                 command.append(str(fromDeviceIndex))
 
