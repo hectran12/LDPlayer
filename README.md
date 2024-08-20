@@ -13,4 +13,5 @@ obj.launchDevice(deviceName="line") # mở device có tên là line
 obj.quit(deviceName="line") # tắt device có tên là line
 obj.quitAll() # tắt tất cả các device
 obj.copy("new_device", fromDeviceName="LDPlayer") # copy device từ LDPlayer sang new_device
+obj.remove(deviceName="new_device") # xóa device new_device
 ```
