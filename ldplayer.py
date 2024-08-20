@@ -72,6 +72,41 @@ class LDPlayer:
         self.objLDExec = exec()
         return
     
+
+    """
+        Copy device 
+        @param deviceName: device name
+        @param fromDeviceName: from device name
+        @param fromDeviceIndex: from device index
+        @return: True if success, else error
+        # Maybe doesn't working for android 7.1, 5.1 , idk:D
+    """
+    def copy (self, deviceName, fromDeviceName: str = '',  fromDeviceIndex: int = None) -> bool:
+        try:
+            command = []
+            command.append(self.ldconsolePath)
+            command.append('copy')
+            command.append('--name')
+            command.append(deviceName)
+
+            if fromDeviceName != '':
+                command.append('--from')
+                command.append(fromDeviceName)
+
+            if fromDeviceIndex != 0:
+                command.append('--from')
+                command.append(str(fromDeviceIndex))
+
+            stdout, stderr = self.objLDExec.execute(command)
+            if stderr != '':
+                raise handleException(stderr)
+            
+            return True
+        except Exception as e:
+            raise handleException(str(e))
+
+
+
     """
         Check vaild path of LDPlayer
         @return: True if vaild path, else False
@@ -201,6 +236,8 @@ class LDPlayer:
         
         except Exception as e:
             raise handleException(str(e))
+        
+
     """
         Launch device
         @param deviceName: device name or @param deviceIndex: device index
