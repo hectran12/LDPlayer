@@ -14,4 +14,11 @@ obj.quit(deviceName="line") # tắt device có tên là line
 obj.quitAll() # tắt tất cả các device
 obj.copy("new_device", fromDeviceName="LDPlayer") # copy device từ LDPlayer sang new_device
 obj.remove(deviceName="new_device") # xóa device new_device
+
+print(obj.getDeviceIndexByName(deviceName="hex_GUL2")) # lấy index của device hex_GUL2
+print(obj.getDeviceNameByIndex(deviceIndex=1)) # lấy tên của device có index 0
+if obj.waitForDeviceRunning(deviceName="hex_GUL2", timeout_wait=120): # chờ máy khởi động vào giao diện android
+    print('Device is running')
+else:
+    print('Device is not running')
 ```
