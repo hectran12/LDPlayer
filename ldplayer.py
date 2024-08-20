@@ -384,13 +384,47 @@ class LDPlayer:
                         if device['title'] == deviceName and device['android_started'] == '1':
                             return True
                     if deviceIndex != None:
-                        if device['index'] == deviceIndex and device['android_started'] == '1':
+                        if device['index'] == str(deviceIndex) and device['android_started'] == '1':
                             return True
                 time.sleep(1)
             return False
         except Exception as e:
             raise handleException(str(e))   
 
+    """
+        get serial number
+        @param deviceName: device name
+        @param deviceIndex: device index
+        @return: serial number
+    """
+    def getSerialNo (self, deviceName: str = '', deviceIndex: int = None) -> bool:
+        try:
+            # ldconsole adb --name "hex_GUL2" --command "adb get-serialno"
+            command = []
+            command.append(self.ldconsolePath)
+            command.append('adb')
+
+            if deviceName != '':
+                command.append('--name')
+                command.append(deviceName)
+
+            if deviceIndex != None:
+                command.append('--index')
+                command.append(str(deviceIndex))
+
+            command.append('--command')
+            command.append('"get-serialno"')
+
+            stdout, stderr = self.objLDExec.execute(command)
+            if stderr != '':
+                raise handleException(stderr)
+            
+
+            return stdout
+
+        except Exception as e:
+            raise handleException(str(e))
+        
 
 
 
