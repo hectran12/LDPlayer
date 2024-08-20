@@ -368,6 +368,8 @@ class LDPlayer:
             return None
         except Exception as e:
             raise handleException(str(e))
+        
+
     """
         wait for device running
         @param deviceName: device name
@@ -426,6 +428,39 @@ class LDPlayer:
             raise handleException(str(e))
         
 
+    """
+        install app (APK OR XAPK)
+        @param deviceName: device name
+        @param deviceIndex: device index
+        @param pathAPK: path apk file
+        @return: True if success, else error
+    """
+    def installAPP (self, deviceName: str = '', deviceIndex: int = None, pathAPK: str = '') -> bool:
+        try:
+            # ldconsole installapp --index 0 --filename "C:\Downloads\game.apk"
+            command = []
+            command.append(self.ldconsolePath)
+            command.append('installapp')
+
+            if deviceName != '':
+                command.append('--name')
+                command.append(deviceName)
+
+
+            if deviceIndex != None:
+                command.append('--index')
+                command.append(str(deviceIndex))
+
+            command.append('--filename')
+            command.append(pathAPK)
+            stdout, stderr = self.objLDExec.execute(command)
+            if stderr != '':
+                raise handleException(stderr)
+            
+            return True
+        
+        except Exception as e:
+            raise handleException(str(e))
 
 
 
