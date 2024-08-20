@@ -1,6 +1,6 @@
 
 
-import subprocess, os
+import subprocess, os, time
 
 
 class exec:
@@ -338,10 +338,62 @@ class LDPlayer:
             return True
         except Exception as e:
             raise handleException(str(e))
-            
+        
+    """
+        get device index by name
+        @param deviceName: device name
+        @return: device index
+    """
+    def getDeviceIndexByName (self, deviceName: str = '') -> bool:
+        try:
+            allDevices = self.getAllDevices()
+            for device in allDevices:
+                if device['title'] == deviceName:
+                    return device['index']
+            return None
+        except Exception as e:
+            raise handleException(str(e))
+        
+    """
+        get device name by index
+        @param deviceIndex: device index
+        @return: device name
+    """
+    def getDeviceNameByIndex (self, deviceIndex: int = None) -> bool:
+        try:
+            allDevices = self.getAllDevices()
+            for device in allDevices:
+                if device['index'] == str(deviceIndex):
+                    return device['title']
+            return None
+        except Exception as e:
+            raise handleException(str(e))
+    """
+        wait for device running
+        @param deviceName: device name
+        @param deviceIndex: device index
+        @param timeout_wait: timeout wait
+        @return: True if success, else False
+    """
+    def waitForDeviceRunning (self, deviceName: str = '', deviceIndex: int = None, timeout_wait: int = 60) -> bool:
+        try:
+            for timemout in range(timeout_wait):
+                allDevices = self.getAllDevices()
+                for device in allDevices:
+                    if deviceName != '':
+                        if device['title'] == deviceName and device['android_started'] == '1':
+                            return True
+                    if deviceIndex != None:
+                        if device['index'] == deviceIndex and device['android_started'] == '1':
+                            return True
+                time.sleep(1)
+            return False
+        except Exception as e:
+            raise handleException(str(e))   
 
 
 
-    
+
+
 
 
