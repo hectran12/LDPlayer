@@ -21,4 +21,8 @@ if obj.waitForDeviceRunning(deviceName="hex_GUL2", timeout_wait=120): # chờ m�
     print('Device is running')
 else:
     print('Device is not running')
+
+
+obj.getSerialNo(deviceName="hex_GUL2") # lấy serial number của device hex_GUL2 để kết nối với adb
+# output example: emulator-5556 (dùng trong case cần exec chỉ định như adb -s emulator-5556 shell input keyevent 3)
 ```
