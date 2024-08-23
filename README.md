@@ -7,10 +7,10 @@ import ldplayer
 obj = ldplayer.LDPlayer() # tìm tới folder có đường dẫn giống như này F:\LDPlayer\LDPlayer9 và set vào envrionment variable hoặc truyền vào hàm __init__
 
 
-obj.createNewDevice('line') # tạo device có tên là line 
-obj.modifyDevice(deviceName="line", width=720, height=1280, dpi=320, cpu=2, memory=2048) # sửa device có tên là line
-obj.launchDevice(deviceName="line") # mở device có tên là line
-obj.quit(deviceName="line") # tắt device có tên là line
+obj.createNewDevice('fb_device') # tạo device có tên là fb_device 
+obj.modifyDevice(deviceName="fb_device", width=720, height=1280, dpi=320, cpu=2, memory=2048) # sửa device có tên là fb_device
+obj.launchDevice(deviceName="fb_device") # mở device có tên là fb_device
+obj.quit(deviceName="fb_device") # tắt device có tên là fb_device
 obj.quitAll() # tắt tất cả các device
 obj.copy("new_device", fromDeviceName="LDPlayer") # copy device từ LDPlayer sang new_device
 obj.remove(deviceName="new_device") # xóa device new_device
